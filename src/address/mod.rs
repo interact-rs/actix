@@ -72,6 +72,8 @@ pub struct Addr<A: Actor> {
     tx: AddressSender<A>,
 }
 
+mod interact;
+
 impl<A: Actor> Addr<A> {
     pub fn new(tx: AddressSender<A>) -> Addr<A> {
         Addr { tx }

@@ -70,6 +70,8 @@ extern crate failure;
 #[macro_use]
 extern crate actix_derive;
 
+extern crate interact;
+
 #[doc(hidden)]
 pub use actix_derive::*;
 
