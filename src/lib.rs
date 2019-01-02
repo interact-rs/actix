@@ -70,6 +70,8 @@ extern crate failure;
 #[macro_use]
 extern crate actix_derive;
 
+extern crate interact;
+
 #[doc(hidden)]
 pub use actix_derive::*;
 
@@ -95,13 +97,16 @@ pub mod registry;
 pub mod sync;
 pub mod utils;
 
-pub use actor::{Actor, ActorContext, ActorState, AsyncContext, Running, SpawnHandle, Supervised};
+pub use actor::{
+    Actor, ActorContext, ActorState, AsyncContext, Running, SpawnHandle, Supervised,
+};
 pub use address::{Addr, MailboxError, Recipient};
 pub use arbiter::Arbiter;
 pub use context::Context;
 pub use fut::{ActorFuture, ActorStream, FinishStream, WrapFuture, WrapStream};
 pub use handler::{
-    ActorResponse, Handler, Message, MessageResult, Response, ResponseActFuture, ResponseFuture,
+    ActorResponse, Handler, Message, MessageResult, Response, ResponseActFuture,
+    ResponseFuture,
 };
 pub use registry::{ArbiterService, Registry, SystemRegistry, SystemService};
 pub use stream::StreamHandler;
@@ -129,12 +134,15 @@ pub mod prelude {
     pub use actor::{
         Actor, ActorContext, ActorState, AsyncContext, Running, SpawnHandle, Supervised,
     };
-    pub use address::{Addr, MailboxError, Recipient, RecipientRequest, Request, SendError};
+    pub use address::{
+        Addr, MailboxError, Recipient, RecipientRequest, Request, SendError,
+    };
     pub use arbiter::Arbiter;
     pub use context::{Context, ContextFutureSpawner};
     pub use fut::{ActorFuture, ActorStream, WrapFuture, WrapStream};
     pub use handler::{
-        ActorResponse, Handler, Message, MessageResult, Response, ResponseActFuture, ResponseFuture,
+        ActorResponse, Handler, Message, MessageResult, Response, ResponseActFuture,
+        ResponseFuture,
     };
     pub use registry::{ArbiterService, SystemService};
     pub use stream::StreamHandler;
