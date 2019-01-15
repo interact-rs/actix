@@ -5,6 +5,7 @@ use std::io;
 use std::time::{Duration, Instant};
 use tokio_io::io::WriteHalf;
 use tokio_tcp::TcpStream;
+use interact::Interact;
 
 use codec::{ChatCodec, ChatRequest, ChatResponse};
 use server::{self, ChatServer};
@@ -14,6 +15,7 @@ use server::{self, ChatServer};
 pub struct Message(pub String);
 
 /// `ChatSession` actor is responsible for tcp peer communications.
+#[derive(Interact)]
 pub struct ChatSession {
     /// unique session id
     id: usize,
@@ -25,6 +27,7 @@ pub struct ChatSession {
     /// joined room
     room: String,
     /// Framed wrapper
+    #[interact(skip)]
     framed: actix::io::FramedWrite<WriteHalf<TcpStream>, ChatCodec>,
 }
 

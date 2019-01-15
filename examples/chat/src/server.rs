@@ -5,6 +5,7 @@
 use actix::prelude::*;
 use rand::{self, Rng};
 use std::collections::{HashMap, HashSet};
+use interact::Interact;
 
 use session;
 
@@ -57,6 +58,7 @@ pub struct Join {
 
 /// `ChatServer` manages chat rooms and responsible for coordinating chat
 /// session. implementation is super primitive
+#[derive(Interact)]
 pub struct ChatServer {
     sessions: HashMap<usize, Addr<session::ChatSession>>,
     rooms: HashMap<String, HashSet<usize>>,

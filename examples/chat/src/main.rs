@@ -13,6 +13,8 @@ extern crate serde_derive;
 
 #[macro_use]
 extern crate actix;
+extern crate interact;
+extern crate interact_prompt;
 
 use std::net;
 use std::str::FromStr;
@@ -64,10 +66,24 @@ impl Handler<TcpConnect> for Server {
     }
 }
 
+fn spawn_interact(chat: Addr<ChatServer>) {
+    let _ = std::thread::spawn(|| {
+        use interact_prompt::*;
+        use std::sync::Arc;
+
+        SendRegistry::insert("server", Box::new(Arc::new(chat)));
+
+        let handle = spawn(Settings::default(), ());
+        handle.join().unwrap();
+    });
+}
+
 fn main() {
     actix::System::run(|| {
         // Start chat server actor
         let server = ChatServer::default().start();
+
+        spawn_interact(server.clone());
 
         // Create server listener
         let addr = net::SocketAddr::from_str("127.0.0.1:12345").unwrap();
